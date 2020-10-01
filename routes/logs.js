@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
+const Logs = require('../models/Logs');
+
 router.get('/', (req, res) => {
   res.send('logs api');
 });
-
-// const Logs = require('../models/Logs');
 
 // // @route		GET api/logs
 // // @desc		Get all logs
