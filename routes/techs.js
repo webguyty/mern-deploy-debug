@@ -1,57 +1,61 @@
 const express = require('express');
 const router = express.Router();
 
-const Techs = require('../models/Techs');
-
-// @route		GET api/techs
-// @desc		Get all techs
-// @access 	Public
-router.get('/', async (req, res) => {
-  try {
-    const techs = await Techs.find();
-    res.json(techs);
-  } catch (error) {
-    console.error(error.msg);
-    res.status(500).send('Server Error');
-  }
+router.get('/', (req, res) => {
+  res.send('techs api');
 });
 
-// @route		POST api/techs
-// @desc		Create a tech
-// @access	Public
-router.post('/', async (req, res) => {
-  try {
-    const { firstName, lastName } = req.body;
+// const Techs = require('../models/Techs');
 
-    const newTech = new Techs({
-      firstName,
-      lastName,
-    });
+// // @route		GET api/techs
+// // @desc		Get all techs
+// // @access 	Public
+// router.get('/', async (req, res) => {
+//   try {
+//     const techs = await Techs.find();
+//     res.json(techs);
+//   } catch (error) {
+//     console.error(error.msg);
+//     res.status(500).send('Server Error');
+//   }
+// });
 
-    const tech = await newTech.save();
+// // @route		POST api/techs
+// // @desc		Create a tech
+// // @access	Public
+// router.post('/', async (req, res) => {
+//   try {
+//     const { firstName, lastName } = req.body;
 
-    res.json(tech);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Server error');
-  }
-});
+//     const newTech = new Techs({
+//       firstName,
+//       lastName,
+//     });
 
-// @route		DELETE api/techs
-// @desc		Delete a tech
-// @access	Public
+//     const tech = await newTech.save();
 
-router.delete('/:id', async (req, res) => {
-  try {
-    let tech = await Techs.findById(req.params.id);
-    if (!tech) return res.status(404).json({ msg: 'Log not found' });
+//     res.json(tech);
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).send('Server error');
+//   }
+// });
 
-    await Techs.findByIdAndRemove(req.params.id);
+// // @route		DELETE api/techs
+// // @desc		Delete a tech
+// // @access	Public
 
-    res.json({ msg: 'Tech Deleted' });
-  } catch (err) {
-    res.status(500).send('Server error');
-  }
-});
+// router.delete('/:id', async (req, res) => {
+//   try {
+//     let tech = await Techs.findById(req.params.id);
+//     if (!tech) return res.status(404).json({ msg: 'Log not found' });
+
+//     await Techs.findByIdAndRemove(req.params.id);
+
+//     res.json({ msg: 'Tech Deleted' });
+//   } catch (err) {
+//     res.status(500).send('Server error');
+//   }
+// });
 
 module.exports = router;

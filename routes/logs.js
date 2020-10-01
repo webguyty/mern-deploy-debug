@@ -1,106 +1,110 @@
 const express = require('express');
 const router = express.Router();
 
-const Logs = require('../models/Logs');
-
-// @route		GET api/logs
-// @desc		Get all logs
-// @access 	Public
-router.get('/', async (req, res) => {
-  try {
-    const logs = await Logs.find();
-    res.json(logs);
-  } catch (error) {
-    console.error(error.msg);
-    res.status(500).send('Server Error');
-  }
+router.get('/', (req, res) => {
+  res.send('logs api');
 });
 
-// @route		POST api/logs
-// @desc		Create a log item
-// @access	Public
-router.post('/', async (req, res) => {
-  try {
-    const { message, attention, tech } = req.body;
+// const Logs = require('../models/Logs');
 
-    const newLog = new Logs({
-      message,
-      attention,
-      tech,
-    });
+// // @route		GET api/logs
+// // @desc		Get all logs
+// // @access 	Public
+// router.get('/', async (req, res) => {
+//   try {
+//     const logs = await Logs.find();
+//     res.json(logs);
+//   } catch (error) {
+//     console.error(error.msg);
+//     res.status(500).send('Server Error');
+//   }
+// });
 
-    const log = await newLog.save();
-    res.json(log);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Server error');
-  }
-});
+// // @route		POST api/logs
+// // @desc		Create a log item
+// // @access	Public
+// router.post('/', async (req, res) => {
+//   try {
+//     const { message, attention, tech } = req.body;
 
-// @route		DELETE api/logs
-// @desc		Delete a log item
-// @access	Public
+//     const newLog = new Logs({
+//       message,
+//       attention,
+//       tech,
+//     });
 
-router.delete('/:id', async (req, res) => {
-  try {
-    let log = await Logs.findById(req.params.id);
-    if (!log) return res.status(404).json({ msg: 'Log not found' });
+//     const log = await newLog.save();
+//     res.json(log);
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).send('Server error');
+//   }
+// });
 
-    await Logs.findByIdAndRemove(req.params.id);
+// // @route		DELETE api/logs
+// // @desc		Delete a log item
+// // @access	Public
 
-    res.json({ msg: 'Log Deleted' });
-  } catch (err) {
-    res.status(500).send('Server error');
-  }
-});
+// router.delete('/:id', async (req, res) => {
+//   try {
+//     let log = await Logs.findById(req.params.id);
+//     if (!log) return res.status(404).json({ msg: 'Log not found' });
 
-// @route		PUT api/logs
-// @desc		Delete a log item
-// @access	Public
+//     await Logs.findByIdAndRemove(req.params.id);
 
-router.put('/:id', async (req, res) => {
-  const { message, attention, tech, date } = req.body;
+//     res.json({ msg: 'Log Deleted' });
+//   } catch (err) {
+//     res.status(500).send('Server error');
+//   }
+// });
 
-  const logFields = {};
+// // @route		PUT api/logs
+// // @desc		Delete a log item
+// // @access	Public
 
-  if (message) logFields.message = message;
-  if (attention !== null) logFields.attention = attention;
-  if (tech) logFields.tech = tech;
-  if (date) logFields.date = date;
+// router.put('/:id', async (req, res) => {
+//   const { message, attention, tech, date } = req.body;
 
-  try {
-    let log = await Logs.findById(req.params.id);
-    if (!log) return res.status(404).json({ msg: 'Log not found' });
+//   const logFields = {};
 
-    log = await Logs.findByIdAndUpdate(
-      req.params.id,
-      { $set: logFields },
-      { new: true }
-    );
+//   if (message) logFields.message = message;
+//   if (attention !== null) logFields.attention = attention;
+//   if (tech) logFields.tech = tech;
+//   if (date) logFields.date = date;
 
-    res.json(log);
-  } catch (err) {
-    res.status(500).send('Server error');
-  }
-});
+//   try {
+//     let log = await Logs.findById(req.params.id);
+//     if (!log) return res.status(404).json({ msg: 'Log not found' });
 
-// @route		GET api/logs/search
-// @desc		Search and get selected logs
-// @access 	Public
-router.get('/search/:str', async (req, res) => {
-  try {
-    // res.send(req.params.str);
-    const logs = await Logs.find({
-      $or: [
-        { message: { $regex: req.params.str, $options: 'i' } },
-        { tech: { $regex: req.params.str, $options: 'i' } },
-      ],
-    });
-    res.json(logs);
-  } catch (error) {
-    console.error(error.msg);
-    res.status(500).send('Server Error');
-  }
-});
+//     log = await Logs.findByIdAndUpdate(
+//       req.params.id,
+//       { $set: logFields },
+//       { new: true }
+//     );
+
+//     res.json(log);
+//   } catch (err) {
+//     res.status(500).send('Server error');
+//   }
+// });
+
+// // @route		GET api/logs/search
+// // @desc		Search and get selected logs
+// // @access 	Public
+// router.get('/search/:str', async (req, res) => {
+//   try {
+//     // res.send(req.params.str);
+//     const logs = await Logs.find({
+//       $or: [
+//         { message: { $regex: req.params.str, $options: 'i' } },
+//         { tech: { $regex: req.params.str, $options: 'i' } },
+//       ],
+//     });
+//     res.json(logs);
+//   } catch (error) {
+//     console.error(error.msg);
+//     res.status(500).send('Server Error');
+//   }
+// });
 
 module.exports = router;
