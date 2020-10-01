@@ -1,0 +1,3 @@
+{
+  "mongoURI": "mongodb+srv://thegungeon:thegungeon@cluster0.inwld.mongodb.net/tickets?retryWrites=true&w=majority"
+}
