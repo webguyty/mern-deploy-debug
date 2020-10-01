@@ -3,22 +3,22 @@ const router = express.Router();
 
 const Logs = require('../models/Logs');
 
-router.get('/', (req, res) => {
-  res.send('logs api');
-});
+// router.get('/', (req, res) => {
+//   res.send('logs api');
+// });
 
 // // @route		GET api/logs
 // // @desc		Get all logs
 // // @access 	Public
-// router.get('/', async (req, res) => {
-//   try {
-//     const logs = await Logs.find();
-//     res.json(logs);
-//   } catch (error) {
-//     console.error(error.msg);
-//     res.status(500).send('Server Error');
-//   }
-// });
+router.get('/', async (req, res) => {
+  try {
+    const logs = await Logs.find();
+    res.json(logs);
+  } catch (error) {
+    console.error(error.msg);
+    res.status(500).send('Server Error');
+  }
+});
 
 // // @route		POST api/logs
 // // @desc		Create a log item

@@ -3,22 +3,22 @@ const router = express.Router();
 
 const Techs = require('../models/Techs');
 
-router.get('/', (req, res) => {
-  res.send('techs api');
-});
+// router.get('/', (req, res) => {
+//   res.send('techs api');
+// });
 
 // // @route		GET api/techs
 // // @desc		Get all techs
 // // @access 	Public
-// router.get('/', async (req, res) => {
-//   try {
-//     const techs = await Techs.find();
-//     res.json(techs);
-//   } catch (error) {
-//     console.error(error.msg);
-//     res.status(500).send('Server Error');
-//   }
-// });
+router.get('/', async (req, res) => {
+  try {
+    const techs = await Techs.find();
+    res.json(techs);
+  } catch (error) {
+    console.error(error.msg);
+    res.status(500).send('Server Error');
+  }
+});
 
 // // @route		POST api/techs
 // // @desc		Create a tech
