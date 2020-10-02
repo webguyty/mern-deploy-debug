@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+<<<<<<< HEAD
     "materialize-css": "^1.0.0",
     "moment": "^2.29.0",
     "react": "^16.13.1",
@@ -14,6 +15,11 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0"
+=======
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.3"
+>>>>>>> 38c1793... react install
   },
   "scripts": {
     "start": "react-scripts start",
@@ -35,6 +41,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+<<<<<<< HEAD
   },
   "proxy": "http://localhost:5000"
+=======
+  }
+>>>>>>> 38c1793... react install
 }

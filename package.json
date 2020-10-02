@@ -23,7 +23,11 @@
     "concurrently": "^5.3.0",
     "nodemon": "^2.0.4"
   },
+<<<<<<< HEAD
   "engines": {
     "node": "v12.16.2"
   }
+=======
+  "proxy": "http://localhost:5000"
+>>>>>>> 38c1793... react install
 }
